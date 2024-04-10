@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="[scrollbar-gutter:stable]">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content={get_csrf_token()} />
+    <.live_title suffix=" · Avaliação para Aprendizagem">
+      <%= assigns[:page_title] || "Olá!" %>
+    </.live_title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap')
+
+      /*
+      <uniquifier>: Use a unique and descriptive class name
+      <weight>: Use a value from 200 to 900
+      */
+
+      .source-sans 3-<uniquifier> {
+        font-family: "Source Sans 3", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: <weight>;
+        font-style: normal;
+      }
+
+      /*
+      <uniquifier>: Use a unique and descriptive class name
+      <weight>: Use a value from 200 to 900
+      */
+
+      .source-code pro-<uniquifier> {
+        font-family: "Source Code Pro", monospace;
+        font-optical-sizing: auto;
+        font-weight: <weight>;
+        font-style: normal;
+      }
+    </style>
+    <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
+    <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
+    </script>
+  </head>
+  <body class="font-sans text-apa-dark bg-white antialiased">
+    <%= @inner_content %>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* This file is for your main application CSS */
+
+@layer components {
+  .heading-1 {
+    font-family: theme('fontFamily.display');
+    font-weight: theme('fontWeight.bold');
+    font-size: theme('fontSize.2xl');
+    line-height: theme('lineHeight.8');
+    letter-spacing: -2.5%;
+  }
+
+  .heading-2 {
+    font-family: theme('fontFamily.display');
+    font-size: theme('fontSize.xl');
+    line-height: theme('lineHeight.7');
+    letter-spacing: -2.5%;
+  }
+
+  .subtitle {
+    font-family: theme('fontFamily.display');
+    font-size: theme('fontSize.lg');
+    line-height: theme('lineHeight.7');
+    letter-spacing: -2.5%;
+  }
+
+  .body {
+    font-size: theme('fontSize.base');
+    line-height: theme('lineHeight.6');
+  }
+}
