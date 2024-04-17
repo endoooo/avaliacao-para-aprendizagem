@@ -15,6 +15,7 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
   Icons are provided by [heroicons](https://heroicons.com). See `icon/1` for usage.
   """
   use Phoenix.Component
+  import Phoenix.HTML, only: [raw: 1]
 
   alias Phoenix.LiveView.JS
   import AvaliacaoParaAprendizagemWeb.Gettext
@@ -132,6 +133,28 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
         >Instituto Singularidades</a>.
       </p>
     </footer>
+    """
+  end
+
+  @doc """
+  Renders the page references block.
+  """
+
+  attr :references, :list, required: true, doc: "The list of page references"
+
+  def page_references(assigns) do
+    ~H"""
+    <div :if={@references && @references != []} class="p-10 bg-apa-lighter">
+      <h5 class="subtitle text-apa-dark">Referências nesta página</h5>
+      <ul>
+        <li :for={reference <- @references} class="mt-6">
+          <%= raw(Earmark.as_html!(reference, inner_html: true)) %>
+        </li>
+      </ul>
+      <a href={~p"/referencias"} class="block mt-6 text-apa-primary underline hover:opacity-60">
+        Veja todas as referências
+      </a>
+    </div>
     """
   end
 

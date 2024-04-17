@@ -54,7 +54,8 @@ defmodule AvaliacaoParaAprendizagem.MixProject do
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
-      {:bandit, "~> 1.2"}
+      {:bandit, "~> 1.2"},
+      {:earmark, "~> 1.4"}
     ]
   end
 
@@ -68,7 +69,10 @@ defmodule AvaliacaoParaAprendizagem.MixProject do
     [
       setup: ["deps.get", "assets.setup", "assets.build"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["tailwind avaliacao_para_aprendizagem", "esbuild avaliacao_para_aprendizagem"],
+      "assets.build": [
+        "tailwind avaliacao_para_aprendizagem",
+        "esbuild avaliacao_para_aprendizagem"
+      ],
       "assets.deploy": [
         "tailwind avaliacao_para_aprendizagem --minify",
         "esbuild avaliacao_para_aprendizagem --minify",

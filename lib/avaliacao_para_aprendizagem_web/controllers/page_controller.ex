@@ -1,6 +1,13 @@
 defmodule AvaliacaoParaAprendizagemWeb.PageController do
   use AvaliacaoParaAprendizagemWeb, :controller
 
+  @references %{
+    "DEHAENE" =>
+      "DEHAENE, Stanislas. **How we learn: Why brains learn better than any machine... for now**. Penguin, 2021.",
+    "FREIRE" =>
+      "FREIRE, Paulo. **Professora, sim; tia, não: cartas a quem ousa ensinar**. Editora Paz e Terra, 2022."
+  }
+
   # def home(conn, _params) do
   #   # The home page is often custom made,
   #   # so skip the default app layout.
@@ -8,7 +15,11 @@ defmodule AvaliacaoParaAprendizagemWeb.PageController do
   # end
 
   def home(conn, _params) do
-    render(conn, :home)
+    references = [
+      @references["FREIRE"]
+    ]
+
+    render(conn, :home, references: references)
   end
 
   def structure(conn, _params) do
@@ -83,7 +94,12 @@ defmodule AvaliacaoParaAprendizagemWeb.PageController do
 
   def references(conn, _params) do
     page_title = "Referências"
-    render(conn, :references, page_title: page_title)
+
+    references =
+      @references
+      |> Enum.map(fn {_, reference} -> reference end)
+
+    render(conn, :references, page_title: page_title, references: references)
   end
 
   def about(conn, _params) do

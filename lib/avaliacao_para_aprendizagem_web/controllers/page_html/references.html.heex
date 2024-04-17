@@ -6,8 +6,10 @@
     Referências
   </h1>
 </header>
-<main class="p-10">
-  <p class="body">
-    TBD
-  </p>
+<main class="px-10 pb-10">
+  <ul>
+    <li :for={reference <- @references} class="mt-10 first:mt-0">
+      <%= raw(Earmark.as_html!(reference, inner_html: true)) %>
+    </li>
+  </ul>
 </main>
