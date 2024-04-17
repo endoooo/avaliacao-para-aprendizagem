@@ -222,6 +222,8 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
   """
   attr :theme, :string, default: "primary"
   attr :type, :string, default: "button"
+  attr :icon_left, :string, default: nil
+  attr :icon_right, :string, default: nil
   attr :class, :string, default: nil
   attr :rest, :global, include: ~w(disabled form name value)
 
@@ -239,7 +241,9 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
       ]}
       {@rest}
     >
+      <.icon :if={@icon_left} name={@icon_left} class="w-5 h-5" />
       <%= render_slot(@inner_block) %>
+      <.icon :if={@icon_right} name={@icon_right} class="w-5 h-5" />
     </button>
     """
   end

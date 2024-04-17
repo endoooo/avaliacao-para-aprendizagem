@@ -31,4 +31,9 @@
     font-size: theme('fontSize.base');
     line-height: theme('lineHeight.6');
   }
+
+  .notes {
+    font-size: theme('fontSize.sm');
+    line-height: theme('lineHeight.5');
+  }
 }
