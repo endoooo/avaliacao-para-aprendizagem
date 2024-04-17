@@ -1,31 +1,40 @@
-<.flash_group flash={@flash} />
-<header class="p-10 bg-apa-primary">
+<header class="min-h-[calc(100vh-5rem)] p-10 bg-apa-primary">
   <.menu_button theme="white" />
-  <h1 class="mt-10 heading-1 text-white">
-    Avaliação para a aprendizagem & neurociência
-  </h1>
-  <p class="mt-10 heading-2 text-white">
-    Um trabalho em defesa da prática docente baseada em avaliações, e o diálogo com a neurociência
-  </p>
+  <.container>
+    <h1 class="mt-10 heading-1 text-white">
+      Avaliação para a aprendizagem & neurociência
+    </h1>
+    <p class="mt-10 heading-2 text-white">
+      Um trabalho em defesa da prática docente baseada em avaliações, e o diálogo com a neurociência
+    </p>
+  </.container>
 </header>
 <main class="p-10">
-  <p class="body">
-    Não há como falar sobre prática docente sem considerar toda a pluralidade das professoras e professores que desempenham tais práticas. Diferentes contextos sociais, culturais, econômicos, diferentes trilhas de formação, diferentes motivos que levaram diferentes pessoas a desempenhar esta tarefa de ensinante, que é também aprendiz, e é igualmente prazerosa e exigente (FREIRE, 2022).
-  </p>
-  <br />
-  <p class="body">
-    Da mesma forma, não há como falarmos de aprendizagem sem considerar a individualidade de quem aprende — não temos como apoiar a aprendizagem sem entender quem nossos estudantes, sem acompanhar o processo de aprendizado de cada um.
-  </p>
-  <br />
-  <p class="body">
-    É respeitando e honrando a diversidade e individualidade de educadores e educandos que este trabalho apresenta uma proposta de sistematização de práticas avaliativas e pilares do aprendizado, sempre buscando o diálogo entre a educação e neurociência, bem como algumas ferramentas que — espero! — podem servir de apoio e/ou inspiração para a sua prática docente.
-  </p>
-  <br />
-  <p class="body">
-    No link abaixo você pode saber mais sobre como este projeto está estruturado e conhecer algumas possibilidades de exploração.
-  </p>
-  <br />
-  <p class="body">Boa leitura!</p>
-  <.button icon_right="hero-arrow-right-mini" class="mt-10">Organização do projeto</.button>
+  <.container>
+    <p class="body">
+      Não há como falar sobre prática docente sem considerar toda a pluralidade das professoras e professores que desempenham tais práticas. Diferentes contextos sociais, culturais, econômicos, diferentes trilhas de formação, diferentes motivos que levaram diferentes pessoas a desempenhar esta tarefa de ensinante, que é também aprendiz, e é igualmente prazerosa e exigente (FREIRE, 2022).
+    </p>
+    <br />
+    <p class="body">
+      Da mesma forma, não há como falarmos de aprendizagem sem considerar a individualidade de quem aprende — não temos como apoiar a aprendizagem sem entender quem nossos estudantes, sem acompanhar o processo de aprendizado de cada um.
+    </p>
+    <br />
+    <p class="body">
+      É respeitando e honrando a diversidade e individualidade de educadores e educandos que este trabalho apresenta uma proposta de sistematização de práticas avaliativas e pilares do aprendizado, sempre buscando o diálogo entre a educação e neurociência, bem como algumas ferramentas que — espero! — podem servir de apoio e/ou inspiração para a sua prática docente.
+    </p>
+    <br />
+    <p class="body">
+      No link abaixo você pode saber mais sobre como este projeto está estruturado e conhecer algumas possibilidades de exploração.
+    </p>
+    <br />
+    <p class="body">Boa leitura!</p>
+    <.button
+      icon_right="hero-arrow-right-mini"
+      class="mt-10"
+      phx-click={JS.navigate(~p"/organizacao")}
+    >
+      Organização do projeto
+    </.button>
+  </.container>
 </main>
 <.page_references references={@references} />

@@ -35,9 +35,11 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
     ~H"""
     <header class="p-10">
       <.menu_button />
-      <h1 class="mt-10 heading-1 text-apa-primary">
-        <%= @title %>
-      </h1>
+      <.container>
+        <h1 class="mt-10 heading-1 text-apa-primary">
+          <%= @title %>
+        </h1>
+      </.container>
     </header>
     """
   end
@@ -124,24 +126,24 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
             >
               Momentos avaliativos
               <:sub_items>
-                <.main_menu_nav_ol
+                <.main_menu_nav_ol_li
                   href={~p"/avaliacao-diagnostica"}
                   class={get_main_menu_active_class(@current_path, "avaliacao-diagnostica")}
                 >
                   Avaliação diagnóstica
-                </.main_menu_nav_ol>
-                <.main_menu_nav_ol
+                </.main_menu_nav_ol_li>
+                <.main_menu_nav_ol_li
                   href={~p"/avaliacao-formativa"}
                   class={get_main_menu_active_class(@current_path, "avaliacao-formativa")}
                 >
                   Avaliação formativa
-                </.main_menu_nav_ol>
-                <.main_menu_nav_ol
+                </.main_menu_nav_ol_li>
+                <.main_menu_nav_ol_li
                   href={~p"/avaliacao-somativa"}
                   class={get_main_menu_active_class(@current_path, "avaliacao-somativa")}
                 >
                   Avaliação somativa
-                </.main_menu_nav_ol>
+                </.main_menu_nav_ol_li>
               </:sub_items>
             </.main_menu_nav_li>
           </ul>
@@ -152,42 +154,42 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
             >
               Pilares do aprendizado
               <:sub_items>
-                <.main_menu_nav_ol
+                <.main_menu_nav_ol_li
                   href={~p"/atencao"}
                   class={get_main_menu_active_class(@current_path, "atencao")}
                 >
                   Atenção
-                </.main_menu_nav_ol>
-                <.main_menu_nav_ol
+                </.main_menu_nav_ol_li>
+                <.main_menu_nav_ol_li
                   href={~p"/envolvimento-ativo"}
                   class={get_main_menu_active_class(@current_path, "envolvimento-ativo")}
                 >
                   Envolvimento ativo
-                </.main_menu_nav_ol>
-                <.main_menu_nav_ol
+                </.main_menu_nav_ol_li>
+                <.main_menu_nav_ol_li
                   href={~p"/feedback-de-erros"}
                   class={get_main_menu_active_class(@current_path, "feedback-de-erros")}
                 >
                   Feedback de erros
-                </.main_menu_nav_ol>
-                <.main_menu_nav_ol
+                </.main_menu_nav_ol_li>
+                <.main_menu_nav_ol_li
                   href={~p"/consolidacao"}
                   class={get_main_menu_active_class(@current_path, "consolidacao")}
                 >
                   Consolidação
-                </.main_menu_nav_ol>
-                <.main_menu_nav_ol
+                </.main_menu_nav_ol_li>
+                <.main_menu_nav_ol_li
                   href={~p"/emocao"}
                   class={get_main_menu_active_class(@current_path, "emocao")}
                 >
                   Emoção
-                </.main_menu_nav_ol>
-                <.main_menu_nav_ol
+                </.main_menu_nav_ol_li>
+                <.main_menu_nav_ol_li
                   href={~p"/metacognicao"}
                   class={get_main_menu_active_class(@current_path, "metacognicao")}
                 >
                   Metacognição
-                </.main_menu_nav_ol>
+                </.main_menu_nav_ol_li>
               </:sub_items>
             </.main_menu_nav_li>
           </ul>
@@ -277,7 +279,7 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
   attr :class, :any, default: nil
   slot :inner_block
 
-  defp main_menu_nav_ol(assigns) do
+  defp main_menu_nav_ol_li(assigns) do
     ~H"""
     <li class={["font-display text-base", @class]}>
       <a href={@href} class="underline hover:opacity-60"><%= render_slot(@inner_block) %></a>
@@ -292,19 +294,25 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
   def footer(assigns) do
     ~H"""
     <footer class="p-10 bg-apa-primary">
-      <.button theme="white" icon_left="hero-bars-3-mini" phx-click={show_menu()}>
-        Menu de navegação
-      </.button>
-      <p class="body mt-6 text-white">
-        O código fonte deste website, de autoria de Eric Endo (2024), é aberto e distribuído sob a licença MIT.
-      </p>
-      <p class="notes mt-6 text-white">
-        Projeto desenvolvido para o Trabalho de Conclusão de Curso da 4ª turma da pós-graduação “Neurociência na escola”, ministrada no <a
-          href="https://institutosingularidades.edu.br/"
-          target="_blank"
-          class="underline"
-        >Instituto Singularidades</a>.
-      </p>
+      <.container>
+        <.button theme="white" icon_left="hero-bars-3-mini" phx-click={show_menu()}>
+          Menu de navegação
+        </.button>
+        <p class="body mt-6 text-white">
+          O código fonte deste website, de autoria de Eric Endo (2024), é aberto e distribuído sob a licença <a
+            href="https://github.com/endoooo/avaliacao-para-aprendizagem?tab=MIT-1-ov-file#readme"
+            target="_blank"
+            class="underline hover:opacity-60"
+          >MIT</a>.
+        </p>
+        <p class="notes mt-6 text-white">
+          Projeto desenvolvido para o Trabalho de Conclusão de Curso da 4ª turma da pós-graduação “Neurociência na escola”, ministrada no <a
+            href="https://institutosingularidades.edu.br/"
+            target="_blank"
+            class="underline hover:opacity-60"
+          >Instituto Singularidades</a>.
+        </p>
+      </.container>
     </footer>
     """
   end
@@ -318,15 +326,32 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
   def page_references(assigns) do
     ~H"""
     <div :if={@references && @references != []} class="p-10 bg-apa-lighter">
-      <h5 class="subtitle text-apa-dark">Referências nesta página</h5>
-      <ul>
-        <li :for={reference <- @references} class="mt-6">
-          <%= raw(Earmark.as_html!(reference, inner_html: true)) %>
-        </li>
-      </ul>
-      <a href={~p"/referencias"} class="block mt-6 text-apa-primary underline hover:opacity-60">
-        Veja todas as referências
-      </a>
+      <.container>
+        <h5 class="subtitle text-apa-dark">Referências nesta página</h5>
+        <ul>
+          <li :for={reference <- @references} class="mt-6">
+            <%= raw(Earmark.as_html!(reference, inner_html: true)) %>
+          </li>
+        </ul>
+        <a href={~p"/referencias"} class="block mt-6 text-apa-primary underline hover:opacity-60">
+          Veja todas as referências
+        </a>
+      </.container>
+    </div>
+    """
+  end
+
+  @doc """
+  Renders a container div.
+  """
+
+  attr :class, :any, default: nil
+  slot :inner_block
+
+  def container(assigns) do
+    ~H"""
+    <div class={["container mx-auto lg:max-w-2xl", @class]}>
+      <%= render_slot(@inner_block) %>
     </div>
     """
   end
@@ -561,8 +586,8 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
   end
 
   @button_themes %{
-    "primary" => "border-apa-primary text-apa-primary",
-    "white" => "border-white text-white"
+    "primary" => "border-apa-primary text-apa-primary hover:bg-apa-primary/10",
+    "white" => "border-white text-white hover:bg-white/10"
   }
 
   defp get_button_theme_classes(theme), do: @button_themes[theme]

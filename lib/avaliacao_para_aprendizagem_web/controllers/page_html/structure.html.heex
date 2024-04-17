@@ -1,17 +1,123 @@
 <.page_header title={@page_title} />
-<main class="p-10">
-  <p class="body">
-    TBD
-  </p>
+<main class="px-10 pb-10">
+  <.container>
+    <p class="body">
+      Este projeto foi pensado como um conjunto de textos a serem explorados, mais do que lidos seguindo alguma ordem específica.
+    </p>
+    <br />
+    <p class="body">
+      Em todas as páginas há links espalhados que podem levar a fluxos e experiências de navegação distintas. De certa forma, cada um de vocês criará a sua própria experiência de leitura!
+    </p>
+    <br />
+    <p class="body">
+      Dito isso, há uma lógica por trás da organização e relações entre cada seção — falaremos mais sobre isso mais abaixo.
+    </p>
+    <br />
+    <p class="body">
+      Antes disso, existe uma única dica bem simples que pode lhe ajudar na sua exploração: sempre que quiserem ter uma visão geral de todas as páginas que existem no projeto, procurem pelas “3 barrinhas” no topo e ao final de cada página:
+    </p>
+    <.button icon_left="hero-bars-3-mini" phx-click={show_menu()} class="mt-10">
+      Menu de navegação
+    </.button>
+    <h2 class="my-10 heading-2">Proposta de sistematização</h2>
+    <p class="body">
+      Como uma forma de articular os temas da aprendizagem, avaliação e neurociência, criamos duas propostas de
+      <em>clusterização</em>
+      de tópicos, baseadas em <strong>momentos avaliativos</strong>
+      e <strong>pilares do aprendizado</strong>.
+    </p>
+    <br />
+    <p class="body">Em todas as páginas que fazem parte deste núcleo da sistematização:</p>
+    <br />
+    <ol class="list-decimal pl-10">
+      <li>
+        estabelecemos algumas bases da neurociência em relação ao momento avaliativo ou pilar do aprendizado na seção <strong>diálogo com a neurociência</strong>;
+      </li>
+      <br />
+      <li>
+        elaboramos, com base na seção acima, a prática avaliativa em sala de aula na seção <strong>em sala de aula</strong>;
+      </li>
+      <br />
+      <li>
+        e encerramos trazendo algumas abordagens de <strong>diferenciação</strong> para a prática.
+      </li>
+    </ol>
+    <h2 class="my-10 heading-2">Momentos avaliativos</h2>
+    <p class="body">
+      Neste <em>cluster</em>, partimos de uma abordagem mais pedagógica, por meios dos momentos de avaliação diagnóstica, formativa e somativa, para estabelecer relações com a neurociência.
+    </p>
+    <.button
+      icon_right="hero-arrow-right-mini"
+      phx-click={JS.navigate(~p"/momentos-avaliativos")}
+      class="mt-10"
+    >
+      Momentos avaliativos
+    </.button>
+    <h2 class="my-10 heading-2">Pilares do aprendizado</h2>
+    <p class="body">
+      Aqui partimos de uma sistematização da aprendizagem pautada na neurociência, que são os 4 pilares do aprendizado propostos por Dehaene (2021), para estabelecer relações com as práticas avaliativas.
+    </p>
+    <.button
+      icon_right="hero-arrow-right-mini"
+      phx-click={JS.navigate(~p"/pilares")}
+      class="mt-10"
+    >
+      Pilares do aprendizado
+    </.button>
+    <h2 class="my-10 heading-2">Pílulas</h2>
+    <p class="body">
+      Pílulas são pequenas unidades de conteúdo que aparecem ao longo do projeto, normalmente em formato de cards, e que podem ser de práticas avaliativas:
+    </p>
+    <div class="flex items-stretch gap-6 my-10">
+      <div class="w-44 h-52 bg-apa-primary"></div>
+      <div class="w-44 h-52 bg-apa-primary"></div>
+      <div class="w-44 h-52 bg-apa-primary"></div>
+    </div>
+    <p class="body">
+      ou de princípios, pequenas afirmações que servem de embasamento para a prática pedagógica/avaliativa:
+    </p>
+    <div class="flex items-stretch gap-6 my-10">
+      <div class="w-44 h-52 bg-apa-primary"></div>
+      <div class="w-44 h-52 bg-apa-primary"></div>
+      <div class="w-44 h-52 bg-apa-primary"></div>
+    </div>
+    <p class="body">
+      Cada pílula tem sua própria página, com um breve texto sobre a prática ou princípio e links externos para aprofundamento.
+    </p>
+    <.button
+      icon_right="hero-arrow-right-mini"
+      phx-click={JS.navigate(~p"/praticas-avaliativas")}
+      class="mt-10"
+    >
+      Práticas avaliativas
+    </.button>
+    <br />
+    <.button
+      icon_right="hero-arrow-right-mini"
+      phx-click={JS.navigate(~p"/principios")}
+      class="mt-10"
+    >
+      Princípios
+    </.button>
+    <h2 class="mt-10 heading-2">Outras páginas</h2>
+    <h3 class="my-10 subtitle">Referências</h3>
+    <p class="body">
+      Ao final de cada página você encontra todas as referências utilizadas, e há também uma página com todas as referências utilizadas no projeto.
+    </p>
+    <.button
+      icon_right="hero-arrow-right-mini"
+      phx-click={JS.navigate(~p"/referencias")}
+      class="mt-10"
+    >
+      Veja todas as referências
+    </.button>
+    <h3 class="my-10 subtitle">Sobre o projeto</h3>
+    <p class="body">
+      Para saber um pouquinho mais sobre a autoria do projeto e o contexto em que ele surge.
+    </p>
+    <.button icon_right="hero-arrow-right-mini" phx-click={JS.navigate(~p"/sobre")} class="mt-10">
+      Sobre
+    </.button>
+  </.container>
 </main>
-<div class="p-10 bg-apa-lighter">
-  <h5 class="subtitle text-apa-dark">Referências nesta página</h5>
-  <ul>
-    <li class="mt-6">
-      DEHAENE, Stanislas. <span class="font-bold">How we learn: Why brains learn better than any machine... for now</span>. Penguin, 2021.
-    </li>
-  </ul>
-  <a href="#" class="block mt-6 text-apa-primary underline hover:no-underline">
-    Veja todas as referências
-  </a>
-</div>
+<.page_references references={@references} />

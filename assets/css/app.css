@@ -2,6 +2,14 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@layer base {
+  :root {
+    --color-primary: 29 78 216
+      /* tw blue 700 */
+    ;
+  }
+}
+
 /* This file is for your main application CSS */
 
 @layer components {

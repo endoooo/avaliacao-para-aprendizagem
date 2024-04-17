@@ -17,7 +17,7 @@ module.exports = {
     extend: {
       colors: {
         apa: {
-          primary: colors.blue["700"],
+          primary: 'rgb(var(--color-primary) / <alpha-value>)',
           dark: colors.slate["700"],
           lighter: colors.slate["200"]
         },

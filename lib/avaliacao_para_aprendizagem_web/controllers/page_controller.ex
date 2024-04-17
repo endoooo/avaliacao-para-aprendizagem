@@ -1,6 +1,8 @@
 defmodule AvaliacaoParaAprendizagemWeb.PageController do
   use AvaliacaoParaAprendizagemWeb, :controller
 
+  alias Phoenix.LiveView.JS
+
   @references %{
     "DEHAENE" =>
       "DEHAENE, Stanislas. **How we learn: Why brains learn better than any machine... for now**. Penguin, 2021.",
@@ -24,7 +26,12 @@ defmodule AvaliacaoParaAprendizagemWeb.PageController do
 
   def structure(conn, _params) do
     page_title = "Organização do projeto"
-    render(conn, :structure, page_title: page_title)
+
+    references = [
+      @references["DEHAENE"]
+    ]
+
+    render(conn, :structure, page_title: page_title, references: references)
   end
 
   def assessment_moments(conn, _params) do
