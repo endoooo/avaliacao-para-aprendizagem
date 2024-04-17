@@ -26,76 +26,245 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
     statics: AvaliacaoParaAprendizagemWeb.static_paths()
 
   @doc """
+  Renders a page header.
+  """
+
+  attr :title, :string, required: true
+
+  def page_header(assigns) do
+    ~H"""
+    <header class="p-10">
+      <.menu_button />
+      <h1 class="mt-10 heading-1 text-apa-primary">
+        <%= @title %>
+      </h1>
+    </header>
+    """
+  end
+
+  @doc """
+  Renders a menu button.
+  """
+
+  attr :theme, :string, default: "default"
+
+  def menu_button(assigns) do
+    ~H"""
+    <button type="button" phx-click={show_menu()} class={get_menu_button_theme_color(@theme)}>
+      <.icon name="hero-bars-3" class="w-6 h-6" />
+    </button>
+    """
+  end
+
+  @menu_button_theme %{
+    color: %{
+      "default" => "text-apa-primary",
+      "white" => "text-white"
+    }
+  }
+
+  defp get_menu_button_theme_color(theme),
+    do: Map.get(@menu_button_theme.color, theme)
+
+  @doc """
   Renders the main menu.
   """
 
+  attr :show, :boolean, default: false
+  attr :conn, Plug.Conn, required: true
+
   def main_menu(assigns) do
+    current_path =
+      case assigns.conn.path_info do
+        [path] -> path
+        [] -> ""
+      end
+
+    assigns =
+      assigns
+      |> assign(:current_path, current_path)
+
     ~H"""
-    <div class="hidden fixed inset-0 p-10 text-white bg-apa-primary overflow-y-auto" id="menu">
-      <button type="button" class="mb-10" phx-click={JS.hide(to: "#menu")}>
-        <.icon name="hero-x-mark" class="w-6 h-6 text-white" />
-      </button>
-      <h5 class="heading-1 text-white">
-        Avaliação para a aprendizagem & neurociência
-      </h5>
-      <nav>
-        <ul class="flex flex-col gap-4 mt-10">
-          <.main_menu_nav_li href={~p"/"}>Introdução</.main_menu_nav_li>
-          <.main_menu_nav_li href={~p"/organizacao"}>Organização do projeto</.main_menu_nav_li>
-        </ul>
-        <h6 class="mt-10 font-display font-bold opacity-50">Sistematização</h6>
-        <ul class="flex flex-col gap-4 mt-10">
-          <.main_menu_nav_li href={~p"/momentos-avaliativos"}>
-            Momentos avaliativos
-            <:sub_items>
-              <.main_menu_nav_ol href={~p"/avaliacao-diagnostica"}>
-                Avaliação diagnóstica
-              </.main_menu_nav_ol>
-              <.main_menu_nav_ol href={~p"/avaliacao-formativa"}>
-                Avaliação formativa
-              </.main_menu_nav_ol>
-              <.main_menu_nav_ol href={~p"/avaliacao-somativa"}>Avaliação somativa</.main_menu_nav_ol>
-            </:sub_items>
-          </.main_menu_nav_li>
-        </ul>
-        <ul class="flex flex-col gap-4 mt-10">
-          <.main_menu_nav_li href={~p"/pilares"}>
-            Pilares do aprendizado
-            <:sub_items>
-              <.main_menu_nav_ol href={~p"/atencao"}>
-                Atenção
-              </.main_menu_nav_ol>
-              <.main_menu_nav_ol href={~p"/envolvimento-ativo"}>
-                Envolvimento ativo
-              </.main_menu_nav_ol>
-              <.main_menu_nav_ol href={~p"/feedback-de-erros"}>Feedback de erros</.main_menu_nav_ol>
-              <.main_menu_nav_ol href={~p"/consolidacao"}>Consolidação</.main_menu_nav_ol>
-              <.main_menu_nav_ol href={~p"/emocao"}>Emoção</.main_menu_nav_ol>
-              <.main_menu_nav_ol href={~p"/metacognicao"}>Metacognição</.main_menu_nav_ol>
-            </:sub_items>
-          </.main_menu_nav_li>
-        </ul>
-        <h6 class="mt-10 font-display font-bold opacity-50">Pílulas</h6>
-        <ul class="flex flex-col gap-4 mt-10">
-          <.main_menu_nav_li href={~p"/praticas-avaliativas"}>Práticas avaliativas</.main_menu_nav_li>
-          <.main_menu_nav_li href={~p"/principios"}>Princípios</.main_menu_nav_li>
-        </ul>
-        <h6 class="mt-10 font-display font-bold opacity-50">Outras páginas</h6>
-        <ul class="flex flex-col gap-4 mt-10">
-          <.main_menu_nav_li href={~p"/referencias"}>Referências</.main_menu_nav_li>
-          <.main_menu_nav_li href={~p"/sobre"}>Sobre o projeto</.main_menu_nav_li>
-        </ul>
-      </nav>
+    <div
+      class="hidden fixed inset-0 bg-apa-primary overflow-y-auto"
+      id="menu"
+      phx-mounted={@show && show_menu()}
+      phx-remove={hide_menu()}
+      data-cancel={JS.exec("phx-remove")}
+    >
+      <.focus_wrap
+        id="menu-wrap"
+        phx-window-keydown={JS.exec("data-cancel", to: "#menu")}
+        phx-key="escape"
+        class="p-10 text-white"
+      >
+        <button type="button" class="mb-10" phx-click={JS.exec("data-cancel", to: "#menu")}>
+          <.icon name="hero-x-mark" class="w-6 h-6 text-white" />
+        </button>
+        <h5 class="heading-1 text-white">
+          Avaliação para a aprendizagem & neurociência
+        </h5>
+        <nav>
+          <ul class="flex flex-col gap-4 mt-10">
+            <.main_menu_nav_li href={~p"/"} class={get_main_menu_active_class(@current_path, "")}>
+              Introdução
+            </.main_menu_nav_li>
+            <.main_menu_nav_li
+              href={~p"/organizacao"}
+              class={get_main_menu_active_class(@current_path, "organizacao")}
+            >
+              Organização do projeto
+            </.main_menu_nav_li>
+          </ul>
+          <h6 class="mt-10 font-display font-bold opacity-50">Sistematização</h6>
+          <ul class="flex flex-col gap-4 mt-10">
+            <.main_menu_nav_li
+              href={~p"/momentos-avaliativos"}
+              class={get_main_menu_active_class(@current_path, "momentos-avaliativos")}
+            >
+              Momentos avaliativos
+              <:sub_items>
+                <.main_menu_nav_ol
+                  href={~p"/avaliacao-diagnostica"}
+                  class={get_main_menu_active_class(@current_path, "avaliacao-diagnostica")}
+                >
+                  Avaliação diagnóstica
+                </.main_menu_nav_ol>
+                <.main_menu_nav_ol
+                  href={~p"/avaliacao-formativa"}
+                  class={get_main_menu_active_class(@current_path, "avaliacao-formativa")}
+                >
+                  Avaliação formativa
+                </.main_menu_nav_ol>
+                <.main_menu_nav_ol
+                  href={~p"/avaliacao-somativa"}
+                  class={get_main_menu_active_class(@current_path, "avaliacao-somativa")}
+                >
+                  Avaliação somativa
+                </.main_menu_nav_ol>
+              </:sub_items>
+            </.main_menu_nav_li>
+          </ul>
+          <ul class="flex flex-col gap-4 mt-10">
+            <.main_menu_nav_li
+              href={~p"/pilares"}
+              class={get_main_menu_active_class(@current_path, "pilares")}
+            >
+              Pilares do aprendizado
+              <:sub_items>
+                <.main_menu_nav_ol
+                  href={~p"/atencao"}
+                  class={get_main_menu_active_class(@current_path, "atencao")}
+                >
+                  Atenção
+                </.main_menu_nav_ol>
+                <.main_menu_nav_ol
+                  href={~p"/envolvimento-ativo"}
+                  class={get_main_menu_active_class(@current_path, "envolvimento-ativo")}
+                >
+                  Envolvimento ativo
+                </.main_menu_nav_ol>
+                <.main_menu_nav_ol
+                  href={~p"/feedback-de-erros"}
+                  class={get_main_menu_active_class(@current_path, "feedback-de-erros")}
+                >
+                  Feedback de erros
+                </.main_menu_nav_ol>
+                <.main_menu_nav_ol
+                  href={~p"/consolidacao"}
+                  class={get_main_menu_active_class(@current_path, "consolidacao")}
+                >
+                  Consolidação
+                </.main_menu_nav_ol>
+                <.main_menu_nav_ol
+                  href={~p"/emocao"}
+                  class={get_main_menu_active_class(@current_path, "emocao")}
+                >
+                  Emoção
+                </.main_menu_nav_ol>
+                <.main_menu_nav_ol
+                  href={~p"/metacognicao"}
+                  class={get_main_menu_active_class(@current_path, "metacognicao")}
+                >
+                  Metacognição
+                </.main_menu_nav_ol>
+              </:sub_items>
+            </.main_menu_nav_li>
+          </ul>
+          <h6 class="mt-10 font-display font-bold opacity-50">Pílulas</h6>
+          <ul class="flex flex-col gap-4 mt-10">
+            <.main_menu_nav_li
+              href={~p"/praticas-avaliativas"}
+              class={get_main_menu_active_class(@current_path, "praticas-avaliativas")}
+            >
+              Práticas avaliativas
+            </.main_menu_nav_li>
+            <.main_menu_nav_li
+              href={~p"/principios"}
+              class={get_main_menu_active_class(@current_path, "principios")}
+            >
+              Princípios
+            </.main_menu_nav_li>
+          </ul>
+          <h6 class="mt-10 font-display font-bold opacity-50">Outras páginas</h6>
+          <ul class="flex flex-col gap-4 mt-10">
+            <.main_menu_nav_li
+              href={~p"/referencias"}
+              class={get_main_menu_active_class(@current_path, "referencias")}
+            >
+              Referências
+            </.main_menu_nav_li>
+            <.main_menu_nav_li
+              href={~p"/sobre"}
+              class={get_main_menu_active_class(@current_path, "sobre")}
+            >
+              Sobre o projeto
+            </.main_menu_nav_li>
+          </ul>
+        </nav>
+      </.focus_wrap>
     </div>
     """
   end
 
+  defp get_main_menu_active_class(current_path, link_path) when current_path == link_path,
+    do: "font-bold"
+
+  defp get_main_menu_active_class(_, _),
+    do: "font-normal"
+
+  def show_menu(js \\ %JS{}) do
+    js
+    |> JS.show(
+      to: "#menu",
+      transition:
+        {"transition-all transform ease-out duration-300", "opacity-0 translate-y-10",
+         "opacity-100 translate-y-0"}
+    )
+    |> JS.add_class("overflow-hidden", to: "body")
+    |> JS.focus_first(to: "#menu")
+  end
+
+  def hide_menu(js \\ %JS{}) do
+    js
+    |> JS.hide(
+      to: "#menu",
+      transition:
+        {"transition-all transform ease-in duration-200", "opacity-100 translate-y-0",
+         "opacity-0 translate-y-10"}
+    )
+    |> JS.remove_class("overflow-hidden", to: "body")
+    |> JS.pop_focus()
+  end
+
   attr :href, :string, required: true
+  attr :class, :any, default: nil
+  slot :inner_block
   slot :sub_items
 
   defp main_menu_nav_li(assigns) do
     ~H"""
-    <li class="font-display text-base">
+    <li class={["font-display text-base", @class]}>
       _ <a href={@href} class="underline hover:opacity-60"><%= render_slot(@inner_block) %></a>
       <ol :if={@sub_items != []} class="flex flex-col gap-4 pl-10 mt-4 list-decimal">
         <%= render_slot(@sub_items) %>
@@ -104,9 +273,13 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
     """
   end
 
+  attr :href, :string, required: true
+  attr :class, :any, default: nil
+  slot :inner_block
+
   defp main_menu_nav_ol(assigns) do
     ~H"""
-    <li class="font-display text-base">
+    <li class={["font-display text-base", @class]}>
       <a href={@href} class="underline hover:opacity-60"><%= render_slot(@inner_block) %></a>
     </li>
     """
@@ -119,7 +292,7 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
   def footer(assigns) do
     ~H"""
     <footer class="p-10 bg-apa-primary">
-      <.button theme="white" icon_left="hero-bars-3-mini" phx-click={JS.show(to: "#menu")}>
+      <.button theme="white" icon_left="hero-bars-3-mini" phx-click={show_menu()}>
         Menu de navegação
       </.button>
       <p class="body mt-6 text-white">
