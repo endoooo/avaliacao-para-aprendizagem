@@ -19,6 +19,122 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
   alias Phoenix.LiveView.JS
   import AvaliacaoParaAprendizagemWeb.Gettext
 
+  use Phoenix.VerifiedRoutes,
+    endpoint: AvaliacaoParaAprendizagemWeb.Endpoint,
+    router: AvaliacaoParaAprendizagemWeb.Router,
+    statics: AvaliacaoParaAprendizagemWeb.static_paths()
+
+  @doc """
+  Renders the main menu.
+  """
+
+  def main_menu(assigns) do
+    ~H"""
+    <div class="hidden fixed inset-0 p-10 text-white bg-apa-primary overflow-y-auto" id="menu">
+      <button type="button" class="mb-10" phx-click={JS.hide(to: "#menu")}>
+        <.icon name="hero-x-mark" class="w-6 h-6 text-white" />
+      </button>
+      <h5 class="heading-1 text-white">
+        Avaliação para a aprendizagem & neurociência
+      </h5>
+      <nav>
+        <ul class="flex flex-col gap-4 mt-10">
+          <.main_menu_nav_li href={~p"/"}>Introdução</.main_menu_nav_li>
+          <.main_menu_nav_li href={~p"/organizacao"}>Organização do projeto</.main_menu_nav_li>
+        </ul>
+        <h6 class="mt-10 font-display font-bold opacity-50">Sistematização</h6>
+        <ul class="flex flex-col gap-4 mt-10">
+          <.main_menu_nav_li href={~p"/momentos-avaliativos"}>
+            Momentos avaliativos
+            <:sub_items>
+              <.main_menu_nav_ol href={~p"/avaliacao-diagnostica"}>
+                Avaliação diagnóstica
+              </.main_menu_nav_ol>
+              <.main_menu_nav_ol href={~p"/avaliacao-formativa"}>
+                Avaliação formativa
+              </.main_menu_nav_ol>
+              <.main_menu_nav_ol href={~p"/avaliacao-somativa"}>Avaliação somativa</.main_menu_nav_ol>
+            </:sub_items>
+          </.main_menu_nav_li>
+        </ul>
+        <ul class="flex flex-col gap-4 mt-10">
+          <.main_menu_nav_li href={~p"/pilares"}>
+            Pilares do aprendizado
+            <:sub_items>
+              <.main_menu_nav_ol href={~p"/atencao"}>
+                Atenção
+              </.main_menu_nav_ol>
+              <.main_menu_nav_ol href={~p"/envolvimento-ativo"}>
+                Envolvimento ativo
+              </.main_menu_nav_ol>
+              <.main_menu_nav_ol href={~p"/feedback-de-erros"}>Feedback de erros</.main_menu_nav_ol>
+              <.main_menu_nav_ol href={~p"/consolidacao"}>Consolidação</.main_menu_nav_ol>
+              <.main_menu_nav_ol href={~p"/emocao"}>Emoção</.main_menu_nav_ol>
+              <.main_menu_nav_ol href={~p"/metacognicao"}>Metacognição</.main_menu_nav_ol>
+            </:sub_items>
+          </.main_menu_nav_li>
+        </ul>
+        <h6 class="mt-10 font-display font-bold opacity-50">Pílulas</h6>
+        <ul class="flex flex-col gap-4 mt-10">
+          <.main_menu_nav_li href={~p"/praticas-avaliativas"}>Práticas avaliativas</.main_menu_nav_li>
+          <.main_menu_nav_li href={~p"/principios"}>Princípios</.main_menu_nav_li>
+        </ul>
+        <h6 class="mt-10 font-display font-bold opacity-50">Outras páginas</h6>
+        <ul class="flex flex-col gap-4 mt-10">
+          <.main_menu_nav_li href={~p"/referencias"}>Referências</.main_menu_nav_li>
+          <.main_menu_nav_li href={~p"/sobre"}>Sobre o projeto</.main_menu_nav_li>
+        </ul>
+      </nav>
+    </div>
+    """
+  end
+
+  attr :href, :string, required: true
+  slot :sub_items
+
+  defp main_menu_nav_li(assigns) do
+    ~H"""
+    <li class="font-display text-base">
+      _ <a href={@href} class="underline hover:opacity-60"><%= render_slot(@inner_block) %></a>
+      <ol :if={@sub_items != []} class="flex flex-col gap-4 pl-10 mt-4 list-decimal">
+        <%= render_slot(@sub_items) %>
+      </ol>
+    </li>
+    """
+  end
+
+  defp main_menu_nav_ol(assigns) do
+    ~H"""
+    <li class="font-display text-base">
+      <a href={@href} class="underline hover:opacity-60"><%= render_slot(@inner_block) %></a>
+    </li>
+    """
+  end
+
+  @doc """
+  Renders the site footer.
+  """
+
+  def footer(assigns) do
+    ~H"""
+    <footer class="p-10 bg-apa-primary">
+      <.button theme="white" icon_left="hero-bars-3-mini" phx-click={JS.show(to: "#menu")}>
+        Menu de navegação
+      </.button>
+      <p class="body mt-6 text-white">
+        O código fonte deste website, de autoria de Eric Endo (2024), é aberto e distribuído sob a licença MIT.
+      </p>
+      <p class="notes mt-6 text-white">
+        Projeto desenvolvido para o Trabalho de Conclusão de Curso da 4ª turma da pós-graduação “Neurociência na escola”, ministrada no <a
+          href="https://institutosingularidades.edu.br/"
+          target="_blank"
+          class="underline"
+        >Instituto Singularidades</a>.
+      </p>
+    </footer>
+    """
+  end
+
   @doc """
   Renders a modal.
 

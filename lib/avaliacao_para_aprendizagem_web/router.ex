@@ -18,6 +18,30 @@ defmodule AvaliacaoParaAprendizagemWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/organizacao", PageController, :structure
+
+    # assessment moments
+    get "/momentos-avaliativos", PageController, :assessment_moments
+    get "/avaliacao-diagnostica", PageController, :diagnostic_assessment
+    get "/avaliacao-formativa", PageController, :formative_assessment
+    get "/avaliacao-somativa", PageController, :summative_assessment
+
+    # learning pillars
+    get "/pilares", PageController, :pillars
+    get "/atencao", PageController, :attention
+    get "/envolvimento-ativo", PageController, :active_engagement
+    get "/feedback-de-erros", PageController, :feedback
+    get "/consolidacao", PageController, :consolidation
+    get "/emocao", PageController, :emotion
+    get "/metacognicao", PageController, :metacognition
+
+    # pills
+    get "/praticas-avaliativas", PageController, :practices
+    get "/principios", PageController, :principles
+
+    # other
+    get "/referencias", PageController, :references
+    get "/sobre", PageController, :about
   end
 
   # Other scopes may use custom stacks.
