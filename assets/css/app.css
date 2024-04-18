@@ -19,13 +19,16 @@
     font-size: theme('fontSize.2xl');
     line-height: theme('lineHeight.8');
     letter-spacing: -2.5%;
+    overflow-wrap: break-word;
   }
 
   .heading-2 {
     font-family: theme('fontFamily.display');
+    font-weight: theme('fontWeight.bold');
     font-size: theme('fontSize.xl');
     line-height: theme('lineHeight.7');
     letter-spacing: -2.5%;
+    overflow-wrap: break-word;
   }
 
   .subtitle {
@@ -33,15 +36,18 @@
     font-size: theme('fontSize.lg');
     line-height: theme('lineHeight.7');
     letter-spacing: -2.5%;
+    overflow-wrap: break-word;
   }
 
   .body {
     font-size: theme('fontSize.base');
     line-height: theme('lineHeight.6');
+    overflow-wrap: break-word;
   }
 
   .notes {
     font-size: theme('fontSize.sm');
     line-height: theme('lineHeight.5');
+    overflow-wrap: break-word;
   }
 }

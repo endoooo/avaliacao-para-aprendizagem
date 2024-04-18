@@ -1,8 +1,10 @@
 <.page_header title={@page_title} />
-<main class="px-10 pb-10">
-  <ul>
-    <li :for={reference <- @references} class="mt-10 first:mt-0">
-      <%= raw(Earmark.as_html!(reference, inner_html: true)) %>
-    </li>
-  </ul>
+<main class="p-10 pb-20">
+  <.container>
+    <ul>
+      <li :for={reference <- @references} class="mt-10 first:mt-0">
+        <%= raw(Earmark.as_html!(reference, inner_html: true)) %>
+      </li>
+    </ul>
+  </.container>
 </main>

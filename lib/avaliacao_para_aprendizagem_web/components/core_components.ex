@@ -334,7 +334,7 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
       <.container>
         <h5 class="subtitle text-apa-dark">Referências nesta página</h5>
         <ul>
-          <li :for={reference <- @references} class="mt-6">
+          <li :for={reference <- @references} class="mt-6 break-words">
             <%= raw(Earmark.as_html!(reference, inner_html: true)) %>
           </li>
         </ul>
@@ -576,7 +576,7 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
     <button
       type={@type}
       class={[
-        "inline-flex items-center gap-2 px-4 py-2 rounded-full border font-display text-base",
+        "inline-flex items-center gap-2 max-w-full px-4 py-2 rounded-full border font-display text-base",
         "phx-submit-loading:opacity-75 active:text-white/80",
         get_button_theme_classes(@theme),
         @class
@@ -584,7 +584,7 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
       {@rest}
     >
       <.icon :if={@icon_left} name={@icon_left} class="w-5 h-5" />
-      <%= render_slot(@inner_block) %>
+      <div class="flex-1 truncate"><%= render_slot(@inner_block) %></div>
       <.icon :if={@icon_right} name={@icon_right} class="w-5 h-5" />
     </button>
     """

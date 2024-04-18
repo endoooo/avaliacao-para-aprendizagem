@@ -1,11 +1,13 @@
 defmodule AvaliacaoParaAprendizagemWeb.PageController do
   use AvaliacaoParaAprendizagemWeb, :controller
 
-  alias Phoenix.LiveView.JS
-
   @references %{
+    "CONSENZA, GUERRA" =>
+      "COSENZA, Ramon; GUERRA, Leonor. **Neurociência e educação**. Artmed Editora, 2011.",
     "DEHAENE" =>
       "DEHAENE, Stanislas. **How we learn: Why brains learn better than any machine... for now**. Penguin, 2021.",
+    "EDUCATION ENDOWMENT FOUNDATION" =>
+      "EDUCATION ENDOWMENT FOUNDATION (EEF). **Evidence and Resources**, © 2024. Evidence-based resources to support teaching and learning for two-19-year-olds. Disponível em: https://educationendowmentfoundation.org.uk/education-evidence. Acesso em: 29 jan. 2024.",
     "FREIRE" =>
       "FREIRE, Paulo. **Professora, sim; tia, não: cartas a quem ousa ensinar**. Editora Paz e Terra, 2022."
   }
@@ -56,7 +58,14 @@ defmodule AvaliacaoParaAprendizagemWeb.PageController do
 
   def pillars(conn, _params) do
     page_title = "Pilares do aprendizado"
-    render(conn, :pillars, page_title: page_title)
+
+    references = [
+      @references["CONSENZA, GUERRA"],
+      @references["DEHAENE"],
+      @references["EDUCATION ENDOWMENT FOUNDATION"]
+    ]
+
+    render(conn, :pillars, page_title: page_title, references: references)
   end
 
   def attention(conn, _params) do

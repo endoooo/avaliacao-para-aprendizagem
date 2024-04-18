@@ -1,17 +1,69 @@
 <.page_header title={@page_title} />
-<main class="p-10">
-  <p class="body">
-    TBD
-  </p>
+<main class="p-10 mb-20">
+  <.container>
+    <p class="body">
+      Uma das formas possíveis (e talvez a mais comum) de sistematizar práticas avaliativas é em relação aos momentos em que elas acontecem e as funções que desempenham em cada um destes momentos.
+    </p>
+    <br />
+    <p class="body">
+      Abaixo você encontra um breve resumo das avaliações diagnóstica, formativa e somativa, e os links para as páginas com maiores detalhes.
+    </p>
+    <section class="mt-20">
+      <h2 class="mb-10 heading-2">1 Avaliação diagnóstica</h2>
+      <p class="body">
+        É a avaliação que acontece antes ou no início de uma trilha de aprendizagem (um projeto, unidade, módulo, etc.).
+      </p>
+      <br />
+      <p class="body">
+        Tem como principal função a checagem e ativação de conhecimentos prévios, bem como a sondagem de interesses, potências e preferências.
+      </p>
+      <.button
+        icon_right="hero-arrow-right-mini"
+        phx-click={JS.navigate(~p"/avaliacao-diagnostica")}
+        class="mt-10"
+      >
+        Avaliação diagnóstica
+      </.button>
+    </section>
+    <section class="mt-20">
+      <h2 class="mb-10 heading-2">2 Avaliação formativa</h2>
+      <p class="body">
+        Muitas vezes tratada como sinônimo de avaliação <strong>para</strong>
+        a aprendizagem, é a avaliação que acontece de forma processual, ao longo de toda a trilha de aprendizagem.
+      </p>
+      <br />
+      <p class="body">
+        Tem como principais funções o enriquecimento da aprendizagem, o acompanhamento dos processos de aprendizagem (pelos professores e pelos próprios estudantes), e é a base para uma prática de feedback contínuo.
+      </p>
+      <.button
+        icon_right="hero-arrow-right-mini"
+        phx-click={JS.navigate(~p"/avaliacao-formativa")}
+        class="mt-10"
+      >
+        Avaliação formativa
+      </.button>
+    </section>
+    <section class="mt-20">
+      <h2 class="my-10 heading-2">3 Avaliação somativa</h2>
+      <p class="body">
+        Também chamada de avaliação da aprendizagem, é a avaliação que acontece normalmente ao final de uma trilha de aprendizagem.
+      </p>
+      <br />
+      <p class="body">
+        Tem como principal função mensurar o alcance dos estudantes em relação aos objetivos de aprendizagem da trilha — e que comumente se converte em notas.
+      </p>
+      <br />
+      <p class="body">
+        Pode assumir uma característica mais formativa quando seus resultados se desdobram em ações pedagógicas/formativas.
+      </p>
+      <.button
+        icon_right="hero-arrow-right-mini"
+        phx-click={JS.navigate(~p"/avaliacao-somativa")}
+        class="mt-10"
+      >
+        Avaliação somativa
+      </.button>
+    </section>
+  </.container>
 </main>
-<div class="p-10 bg-apa-lighter">
-  <h5 class="subtitle text-apa-dark">Referências nesta página</h5>
-  <ul>
-    <li class="mt-6">
-      DEHAENE, Stanislas. <span class="font-bold">How we learn: Why brains learn better than any machine... for now</span>. Penguin, 2021.
-    </li>
-  </ul>
-  <a href="#" class="block mt-6 text-apa-primary underline hover:no-underline">
-    Veja todas as referências
-  </a>
-</div>
+<%!-- <.page_references references={@references} /> --%>
