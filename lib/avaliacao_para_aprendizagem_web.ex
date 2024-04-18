@@ -17,7 +17,9 @@ defmodule AvaliacaoParaAprendizagemWeb do
   those modules here.
   """
 
-  def static_paths, do: ~w(assets fonts images favicon.ico robots.txt)
+  def static_paths,
+    do:
+      ~w(assets fonts images favicon.ico robots.txt artigo-avaliacao-para-aprendizagem-e-neurociencia.pdf)
 
   def router do
     quote do

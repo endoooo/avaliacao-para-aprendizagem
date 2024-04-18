@@ -228,6 +228,15 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
               Sobre o projeto
             </.main_menu_nav_li>
           </ul>
+          <div class="mt-10">
+            <a
+              href="/artigo-avaliacao-para-aprendizagem-e-neurociencia.pdf"
+              target="_blank"
+              class="inline-flex items-center gap-2 p-2 border border-white rounded-sm font-display hover:bg-white/10"
+            >
+              <.icon name="hero-document-text" class="w-6 h-6" /> Leia o artigo
+            </a>
+          </div>
         </nav>
       </.focus_wrap>
     </div>
