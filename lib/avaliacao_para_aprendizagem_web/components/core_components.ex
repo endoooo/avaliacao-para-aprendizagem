@@ -49,10 +49,15 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
   """
 
   attr :theme, :string, default: "default"
+  attr :class, :any, default: nil
 
   def menu_button(assigns) do
     ~H"""
-    <button type="button" phx-click={show_menu()} class={get_menu_button_theme_color(@theme)}>
+    <button
+      type="button"
+      phx-click={show_menu()}
+      class={[get_menu_button_theme_color(@theme), @class]}
+    >
       <.icon name="hero-bars-3" class="w-6 h-6" />
     </button>
     """
@@ -88,7 +93,7 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
 
     ~H"""
     <div
-      class="hidden fixed inset-0 bg-apa-primary overflow-y-auto"
+      class="hidden fixed inset-0 z-50 bg-apa-primary overflow-y-auto"
       id="menu"
       phx-mounted={@show && show_menu()}
       phx-remove={hide_menu()}
@@ -299,11 +304,11 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
           Menu de navegação
         </.button>
         <p class="body mt-6 text-white">
-          O código fonte deste website, de autoria de Eric Endo (2024), é aberto e distribuído sob a licença <a
+          O código fonte deste guia, de autoria de Eric Endo (2024), é aberto e <a
             href="https://github.com/endoooo/avaliacao-para-aprendizagem?tab=MIT-1-ov-file#readme"
             target="_blank"
             class="underline hover:opacity-60"
-          >MIT</a>.
+          >distribuído sob a licença MIT</a>.
         </p>
         <p class="notes mt-6 text-white">
           Projeto desenvolvido para o Trabalho de Conclusão de Curso da 4ª turma da pós-graduação “Neurociência na escola”, ministrada no <a

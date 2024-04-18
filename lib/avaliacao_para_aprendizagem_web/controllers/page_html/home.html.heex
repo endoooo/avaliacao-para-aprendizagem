@@ -1,6 +1,7 @@
-<header class="min-h-[calc(100vh-5rem)] p-10 bg-apa-primary">
-  <.menu_button theme="white" />
-  <.container>
+<header class="relative flex flex-col items-start min-h-[calc(100vh-5rem)] p-10 bg-apa-primary">
+  <div id="cover-bg" class="absolute inset-0"></div>
+  <.menu_button theme="white" class="relative z-10" />
+  <.container class="relative z-10 flex-1 flex flex-col justify-center">
     <h1 class="mt-10 heading-1 text-white">
       Avaliação para a aprendizagem & neurociência
     </h1>
@@ -38,3 +39,93 @@
   </.container>
 </main>
 <.page_references references={@references} />
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.2/lib/p5.js">
+</script>
+<script>
+  const canvasDiv = document.getElementById('cover-bg')
+  const canvasW = canvasDiv.offsetWidth
+  const canvasH = canvasDiv.offsetHeight
+
+  let particles = []
+  const numParticles = Math.round(canvasW / 20)
+  let connections = []
+  const minConnectionDist = 100
+  const minV = -1
+  const maxV = 1
+
+  function setup() {
+    const canvas = createCanvas(canvasW, canvasH);
+    canvas.parent('cover-bg');
+
+    // create particles
+    for(let i = 0; i < numParticles; i++) {
+      const particle = {
+        pos: createVector(random() * width, random() * height),
+        vel: createVector(random(minV, maxV), random(minV, maxV))
+      }
+      particles.push(particle)
+    }
+
+    // create connections
+    updateConnections()
+  }
+
+  function draw() {
+    background(29, 78, 216)
+
+    // draw particles
+    strokeWeight(5)
+    stroke(255, 128)
+
+    particles.forEach(p => {
+      point(p.pos)
+    })
+
+    // draw connections
+    strokeWeight(1)
+
+    connections.forEach(c => {
+      stroke(255, c.opacity)
+      line(c.posA.x, c.posA.y, c.posB.x, c.posB.y)
+    })
+
+    // update particles
+    particles = particles.map(p => {
+      const newPos = p.pos.add(p.vel)
+
+      let velX = p.vel.x
+      let velY = p.vel.y
+
+      // maybe update vel
+      if (newPos.x < 0 || newPos.x > width) velX = velX * -1
+      if (newPos.y < 0 || newPos.y > height) velY = velY * -1
+
+      return {
+        pos: newPos,
+        vel: createVector(velX, velY)
+      }
+    })
+
+    // update connections
+    updateConnections()
+  }
+
+  function updateConnections() {
+    const particlesLength = particles.length
+    connections = []
+
+    for(let i = 0; i < particlesLength; i++) {
+      for(let j = 1; j < particlesLength; j++) {
+        const d = particles[i].pos.dist(particles[j].pos)
+        if (d < minConnectionDist) {
+          const connection = {
+            posA: particles[i].pos,
+            posB: particles[j].pos,
+            opacity: 128 - ((d / minConnectionDist) * 128)
+          }
+          connections.push(connection)
+        }
+      }
+    }
+  }
+</script>
