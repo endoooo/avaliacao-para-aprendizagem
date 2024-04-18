@@ -362,6 +362,29 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
   end
 
   @doc """
+  Renders a pill card.
+  """
+
+  attr :type, :string, required: true
+  attr :class, :any, default: nil
+  slot :inner_block
+
+  def pill_card(assigns) do
+    ~H"""
+    <div class={["p-6 sm:p-10 rounded-sm text-white bg-apa-primary shadow-lg", @class]}>
+      <div class="inline-block p-2 mb-4 text-sm bg-white/25"><%= @type %></div>
+      <p class="font-display text-base"><%= render_slot(@inner_block) %></p>
+      <p class="mt-2 text-xs opacity-50">
+        🚧 Pílulas em desenvolvimento. Em breve elas estarão funcionando :)
+      </p>
+      <div class="flex justify-end mt-6 sm:mt-10">
+        <.icon name="hero-arrow-right" class="w-6 h-6" />
+      </div>
+    </div>
+    """
+  end
+
+  @doc """
   Renders a modal.
 
   ## Examples
