@@ -135,19 +135,19 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
                   href={~p"/avaliacao-diagnostica"}
                   class={get_main_menu_active_class(@current_path, "avaliacao-diagnostica")}
                 >
-                  Avaliação diagnóstica
+                  Avaliação diagnóstica 🚧
                 </.main_menu_nav_ol_li>
                 <.main_menu_nav_ol_li
                   href={~p"/avaliacao-formativa"}
                   class={get_main_menu_active_class(@current_path, "avaliacao-formativa")}
                 >
-                  Avaliação formativa
+                  Avaliação formativa 🚧
                 </.main_menu_nav_ol_li>
                 <.main_menu_nav_ol_li
                   href={~p"/avaliacao-somativa"}
                   class={get_main_menu_active_class(@current_path, "avaliacao-somativa")}
                 >
-                  Avaliação somativa
+                  Avaliação somativa 🚧
                 </.main_menu_nav_ol_li>
               </:sub_items>
             </.main_menu_nav_li>
@@ -163,37 +163,37 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
                   href={~p"/atencao"}
                   class={get_main_menu_active_class(@current_path, "atencao")}
                 >
-                  Atenção
+                  Atenção 🚧
                 </.main_menu_nav_ol_li>
                 <.main_menu_nav_ol_li
                   href={~p"/envolvimento-ativo"}
                   class={get_main_menu_active_class(@current_path, "envolvimento-ativo")}
                 >
-                  Envolvimento ativo
+                  Envolvimento ativo 🚧
                 </.main_menu_nav_ol_li>
                 <.main_menu_nav_ol_li
                   href={~p"/feedback-de-erros"}
                   class={get_main_menu_active_class(@current_path, "feedback-de-erros")}
                 >
-                  Feedback de erros
+                  Feedback de erros 🚧
                 </.main_menu_nav_ol_li>
                 <.main_menu_nav_ol_li
                   href={~p"/consolidacao"}
                   class={get_main_menu_active_class(@current_path, "consolidacao")}
                 >
-                  Consolidação
+                  Consolidação 🚧
                 </.main_menu_nav_ol_li>
                 <.main_menu_nav_ol_li
                   href={~p"/emocao"}
                   class={get_main_menu_active_class(@current_path, "emocao")}
                 >
-                  Emoção
+                  Emoção 🚧
                 </.main_menu_nav_ol_li>
                 <.main_menu_nav_ol_li
                   href={~p"/metacognicao"}
                   class={get_main_menu_active_class(@current_path, "metacognicao")}
                 >
-                  Metacognição
+                  Metacognição 🚧
                 </.main_menu_nav_ol_li>
               </:sub_items>
             </.main_menu_nav_li>
@@ -204,13 +204,13 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
               href={~p"/praticas-avaliativas"}
               class={get_main_menu_active_class(@current_path, "praticas-avaliativas")}
             >
-              Práticas avaliativas
+              Práticas avaliativas 🚧
             </.main_menu_nav_li>
             <.main_menu_nav_li
               href={~p"/principios"}
               class={get_main_menu_active_class(@current_path, "principios")}
             >
-              Princípios
+              Princípios 🚧
             </.main_menu_nav_li>
           </ul>
           <h6 class="mt-10 font-display font-bold opacity-50">Outras páginas</h6>
