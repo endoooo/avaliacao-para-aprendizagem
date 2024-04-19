@@ -2,8 +2,10 @@ defmodule AvaliacaoParaAprendizagemWeb.PageController do
   use AvaliacaoParaAprendizagemWeb, :controller
 
   @references %{
+    "AMARAL, GUERRA" =>
+      "AMARAL, Ana Luiza Neiva; GUERRA, Leonor Bezerra. **Neurociência e Educação: olhando para o futuro da aprendizagem**. Brasília: SESI/DN, 2022. Disponível em: https://static.portaldaindustria.com.br/media/filer_public/24/33/ 24331119-5631-42c0-b141-9821064c820c/neurociencia_e_educacao_2022.pdf. Acesso em 10, dez. 2023.",
     "CONSENZA, GUERRA" =>
-      "COSENZA, Ramon; GUERRA, Leonor. **Neurociência e educação**. Artmed Editora, 2011.",
+      "COSENZA, Ramon; GUERRA, Leonor. **Neurociência e educação**. Artmed Editora, 2009.",
     "DEHAENE" =>
       "DEHAENE, Stanislas. **How we learn: Why brains learn better than any machine... for now**. Penguin, 2021.",
     "EDUCATION ENDOWMENT FOUNDATION" =>
@@ -70,7 +72,14 @@ defmodule AvaliacaoParaAprendizagemWeb.PageController do
 
   def attention(conn, _params) do
     page_title = "Atenção"
-    render(conn, :attention, page_title: page_title)
+
+    references = [
+      @references["AMARAL, GUERRA"],
+      @references["CONSENZA, GUERRA"],
+      @references["DEHAENE"]
+    ]
+
+    render(conn, :attention, page_title: page_title, references: references)
   end
 
   def active_engagement(conn, _params) do

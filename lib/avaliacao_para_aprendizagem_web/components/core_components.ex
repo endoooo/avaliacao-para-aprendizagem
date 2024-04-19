@@ -394,6 +394,40 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
   end
 
   @doc """
+  Renders a link.
+  """
+
+  attr :href, :string, required: true
+  attr :target, :string, default: nil
+  attr :theme, :string, default: "default"
+  slot :inner_block
+
+  def apa_link(assigns) do
+    ~H"""
+    <a
+      class={[
+        "align-baseline hover:opacity-60",
+        get_apa_link_theme_classes(@theme)
+      ]}
+      href={@href}
+      target={@target}
+    >
+      <span class="underline"><%= render_slot(@inner_block) %></span>
+      <.icon name="hero-document-text-mini" class="w-5 h-5" />
+    </a>
+    """
+  end
+
+  @apa_link %{
+    "default" => "",
+    "primary" => "text-apa-primary",
+    "white" => "text-white"
+  }
+
+  defp get_apa_link_theme_classes(theme),
+    do: Map.get(@apa_link, theme)
+
+  @doc """
   Renders a modal.
 
   ## Examples
