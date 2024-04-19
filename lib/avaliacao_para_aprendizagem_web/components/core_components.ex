@@ -343,13 +343,16 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
       <.container>
         <h5 class="subtitle text-apa-dark">Referências nesta página</h5>
         <ul>
-          <li :for={reference <- @references} class="mt-6 break-words">
+          <li :for={reference <- @references} class="mt-6 break-words prose">
             <%= raw(Earmark.as_html!(reference, inner_html: true)) %>
           </li>
         </ul>
-        <a href={~p"/referencias"} class="block mt-6 text-apa-primary underline hover:opacity-60">
-          Veja todas as referências
-        </a>
+        <.apa_link
+          text="Veja todas as referências"
+          href={~p"/referencias"}
+          class="mt-6"
+          theme="primary"
+        />
       </.container>
     </div>
     """
@@ -397,23 +400,25 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
   Renders a link.
   """
 
+  attr :text, :string, required: true
   attr :href, :string, required: true
   attr :target, :string, default: nil
   attr :theme, :string, default: "default"
-  slot :inner_block
+  attr :class, :any, default: nil
 
   def apa_link(assigns) do
     ~H"""
     <a
       class={[
-        "align-baseline hover:opacity-60",
-        get_apa_link_theme_classes(@theme)
+        "inline-flex items-baseline gap-1 hover:opacity-60",
+        get_apa_link_theme_classes(@theme),
+        @class
       ]}
       href={@href}
       target={@target}
     >
-      <span class="underline"><%= render_slot(@inner_block) %></span>
-      <.icon name="hero-document-text-mini" class="w-5 h-5" />
+      <.icon name="hero-document-text-mini" class="w-5 h-5 translate-y-1" />
+      <span class="underline"><%= @text %></span>
     </a>
     """
   end
