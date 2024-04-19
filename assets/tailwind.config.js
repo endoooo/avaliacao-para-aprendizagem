@@ -19,6 +19,7 @@ module.exports = {
         apa: {
           primary: 'rgb(var(--color-primary) / <alpha-value>)',
           dark: colors.slate["700"],
+          subtle: colors.slate["400"],
           lighter: colors.slate["200"]
         },
       },

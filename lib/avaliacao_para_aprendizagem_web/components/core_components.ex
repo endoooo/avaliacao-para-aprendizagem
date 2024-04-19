@@ -30,8 +30,11 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
   """
 
   attr :title, :string, required: true
+  attr :with_cover, :string, default: nil, doc: "cover image URL"
 
-  def page_header(assigns) do
+  slot :cover_img_credits
+
+  def page_header(%{with_cover: nil} = assigns) do
     ~H"""
     <header class="p-10">
       <.menu_button />
@@ -41,6 +44,28 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
         </h1>
       </.container>
     </header>
+    """
+  end
+
+  def page_header(assigns) do
+    ~H"""
+    <header
+      class="relative flex flex-col items-start min-h-[calc(50vh)] p-10 bg-cover bg-center"
+      style={"background-image: url('#{@with_cover}')"}
+    >
+      <div class="absolute inset-0 bg-white/80"></div>
+      <.menu_button class="relative z-10" />
+      <.container class="relative z-10 flex-1 flex flex-col justify-end">
+        <h1 class="mt-10 heading-1 text-apa-primary">
+          <%= @title %>
+        </h1>
+      </.container>
+    </header>
+    <div :if={@cover_img_credits != []} class="px-10 mt-2">
+      <.container class="text-xs sm:text-right text-apa-subtle">
+        <%= render_slot(@cover_img_credits) %>
+      </.container>
+    </div>
     """
   end
 
@@ -56,7 +81,11 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
     <button
       type="button"
       phx-click={show_menu()}
-      class={[get_menu_button_theme_color(@theme), @class]}
+      class={[
+        "flex items-center justify-center w-10 h-10 rounded-full",
+        get_menu_button_theme_color(@theme),
+        @class
+      ]}
     >
       <.icon name="hero-bars-3" class="w-6 h-6" />
     </button>
@@ -65,8 +94,8 @@ defmodule AvaliacaoParaAprendizagemWeb.CoreComponents do
 
   @menu_button_theme %{
     color: %{
-      "default" => "text-apa-primary",
-      "white" => "text-white"
+      "default" => "text-apa-primary hover:bg-white",
+      "white" => "text-white hover:bg-apa-primary"
     }
   }
 
